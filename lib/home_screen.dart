@@ -4,6 +4,7 @@ import 'colors.dart' as col;
 import 'texts.dart' as tx;
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'phone_verify_page.dart';
 
 
 class Home extends StatefulWidget {
@@ -79,7 +80,9 @@ class _HomeState extends State<Home> {
 
                 ),
                 child: ElevatedButton(
-                  onPressed: () {debugPrint("citizen presed");},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (c) => PhoneVerify()));
+                    debugPrint("citizen presed");},
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(150.0)

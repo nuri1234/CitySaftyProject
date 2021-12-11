@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'home page',
       debugShowCheckedModeBanner: false,
-      home: PhoneVerify(),
+      home: Home(),
     );
   }
 }
