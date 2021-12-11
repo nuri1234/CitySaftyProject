@@ -7,6 +7,8 @@ class app_texts{
   static String EmergencyCenter2= "Center";
   static String HomepageExplane= "Please select a user type";
   static String EnterPhon= "Please enter your phone number ";
+  static String Next= "Next";
+  static String phoneNumber= "phone number";
 
 
 

@@ -5,6 +5,7 @@ import 'colors.dart' as col;
 import 'texts.dart' as tx;
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'otp.dart';
 
 
 
@@ -22,14 +23,14 @@ class _PhoneVerifyState extends State<PhoneVerify> {
     return Scaffold(
       backgroundColor: col.app_colors.background,
       body: Container(
-        padding: const EdgeInsets.only(top:30,left: 50,right: 30),
+        padding: const EdgeInsets.only(top:30,left: 20,right: 20),
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 120,),
               Text(tx.app_texts.EnterPhon,
-                style: GoogleFonts.asset(
-                  fontSize: 20,
+                style: GoogleFonts.stylish(
+                  fontSize:28,
                   color: col.app_colors.explaneText,
                   fontWeight: FontWeight.w100,
                   shadows: [
@@ -47,25 +48,44 @@ class _PhoneVerifyState extends State<PhoneVerify> {
               SizedBox(height: 40,),
               TextField(
                decoration: InputDecoration(
-               hintText: "phone number",
+                 enabledBorder: OutlineInputBorder(
+                   borderSide: BorderSide(color:col.app_colors.BorderSide, width: 2.0),
+                   borderRadius: BorderRadius.circular(20.0),
+                 ),
+               focusedBorder:OutlineInputBorder(
+                   borderSide: BorderSide(color:col.app_colors.BorderSide, width: 2.0),
+                   borderRadius: BorderRadius.circular(20.0) ,
+
+               ),
+               prefixIcon: Icon(Icons.add_ic_call_outlined,color:col.app_colors.BorderSide,size: 20.0,),
+               hintText: tx.app_texts.phoneNumber,
+               fillColor: col.app_colors.textInputFill,
+               filled: true,
                prefix: Padding(
                padding: EdgeInsets.all(4),
                child: Text("+972"),
                ) ),
-                maxLength: 12,
+                maxLength: 10,
                 keyboardType: TextInputType.number,
                 controller: _phone,
               ),
               ElevatedButton(
                 onPressed:(){
                   debugPrint(_phone.text);
-                //  Navigator.of(context).push(MaterialPageRoute(builder: (c)=>OTP(
-                   // phone:_controller.text,
-                    //codeDigits: dialCodeDigits,
-                 // )));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (c)=>OTP(
+                    phone:_phone.text,
+
+                  )));
 
                 } ,
-                child: Text('next', style: TextStyle(color: Colors.white,fontWeight:FontWeight.bold ),),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  primary:  col.app_colors.button,
+                  minimumSize: Size(70.0, 50.0),
+                ),
+                child: Text(tx.app_texts.Next, style: TextStyle(color: col.app_colors.text_button,fontWeight:FontWeight.bold ),),
               ),
 
             ],
