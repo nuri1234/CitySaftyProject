@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-import 'Verified_successfully.dart';
+import 'data_base.dart' as db;
+import 'signup_screen.dart';
+import 'city_safty_screen.dart';
 class OTP extends StatefulWidget {
 
 
@@ -13,6 +15,7 @@ class OTP extends StatefulWidget {
   @override
   _OTPState createState() => _OTPState();
 }
+
 
 class _OTPState extends State<OTP> {
   final GlobalKey<ScaffoldState> _scaffoldkey= GlobalKey<ScaffoldState>();
@@ -28,6 +31,29 @@ class _OTPState extends State<OTP> {
 
   );
 
+  void findUser() async{
+    var myuser = await db.getUserByphon(widget.phone);
+    if(myuser.phone=="X") {
+      debugPrint("user not existed");
+      Navigator.push(context,MaterialPageRoute(builder: (context) => SignUp(
+      phone: widget.phone
+      )));
+    }
+
+      
+
+    else{
+      debugPrint("existed user");
+      Navigator.of(context).push(MaterialPageRoute(builder: (c)=>CitySafety(
+          myUser:myuser,)));
+
+
+    }
+
+
+
+
+  }
 
   @override
   void initState(){
@@ -43,7 +69,8 @@ class _OTPState extends State<OTP> {
         await FirebaseAuth.instance.signInWithCredential(credential).then((
             value) {
           if (value.user != null) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (c) => VS()));
+            findUser();
+            //Navigator.of(context).push(MaterialPageRoute(builder: (c) => VS()));
           }
         });
       },
@@ -51,8 +78,8 @@ class _OTPState extends State<OTP> {
         FocusScope.of(context).unfocus();
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(e.message.toString()),
-              duration: Duration(seconds: 3),
+              content: Text(e.message.toString(),),
+              duration: Duration(seconds: 5),
 
             )
         );
@@ -116,7 +143,9 @@ class _OTPState extends State<OTP> {
                       PhoneAuthProvider.credential(
                           verificationId: varificationCode!, smsCode: pin)).then((value) {
                     if(value.user!=null){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (c)=>VS()));
+                      findUser();
+
+
                     }
                   });
 
@@ -130,6 +159,7 @@ class _OTPState extends State<OTP> {
 
                       )
                   );
+                  Navigator.pop(context);
 
                 }
 

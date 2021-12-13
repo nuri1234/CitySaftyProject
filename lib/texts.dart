@@ -9,6 +9,11 @@ class app_texts{
   static String EnterPhon= "Please enter your phone number ";
   static String Next= "Next";
   static String phoneNumber= "phone number";
+  static String firstName="first name";
+  static String lastName="last name";
+  static String enterfirstName="Please Enter first name";
+  static String enterlastName="Please Enter last name";
+  static String submit="Submit";
 
 
 

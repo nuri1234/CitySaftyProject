@@ -6,6 +6,7 @@ import 'texts.dart' as tx;
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'otp.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 
 
@@ -17,7 +18,8 @@ class PhoneVerify extends StatefulWidget {
 }
 
 class _PhoneVerifyState extends State<PhoneVerify> {
-  TextEditingController _phone= TextEditingController();
+  final maskFormatter = MaskTextInputFormatter(mask: 'XX#-#######', filter: { "#": RegExp(r'[0-9]') ,"X": RegExp(r'[0,5]') });
+  final TextEditingController _phone= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,15 +67,17 @@ class _PhoneVerifyState extends State<PhoneVerify> {
                padding: EdgeInsets.all(4),
                child: Text("+972"),
                ) ),
-                maxLength: 10,
+                maxLength: 11,
+
                 keyboardType: TextInputType.number,
                 controller: _phone,
+                inputFormatters: [maskFormatter],
               ),
               ElevatedButton(
                 onPressed:(){
                   debugPrint(_phone.text);
                   Navigator.of(context).push(MaterialPageRoute(builder: (c)=>OTP(
-                    phone:_phone.text,
+                    phone:maskFormatter.getUnmaskedText(),
 
                   )));
 
