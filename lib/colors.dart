@@ -14,6 +14,7 @@ class app_colors{
   static Color BorderSide = const Color(0xff7BDED0);
   static Color textInputFill = const Color(0xff8FB9D0);
   static Color BorderSideFocus= const Color(0xffE1FCF9);
+  static Color LoadingCirclr= const Color(0xffffffff);
 
 
 }
