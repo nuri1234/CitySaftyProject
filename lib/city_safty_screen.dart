@@ -3,10 +3,10 @@ import 'entities/user.dart';
 
 
 class CitySafety extends StatefulWidget {
-  final user myUser;
+  final User user;
 
 
-  CitySafety({required this.myUser});
+  CitySafety({required this.user});
 
   @override
   _CitySafetyState createState() => _CitySafetyState();
@@ -21,7 +21,7 @@ class _CitySafetyState extends State<CitySafety> {
         centerTitle: true,
         title: Text("sity safty screen", style: TextStyle(color: Colors.white),),
       ),
-      body: Text ("welcome ${widget.myUser.first_name}"),
+      body: Text ("welcome ${widget.user.first_name}"),
 
 
 

@@ -3,6 +3,7 @@ import 'inputDeco_design.dart';
 import 'colors.dart' as col;
 import 'texts.dart' as tx;
 import 'package:google_fonts/google_fonts.dart';
+import 'user_db.dart' as uDB;
 
 class SignUp extends StatefulWidget {
   final String phone;
@@ -15,11 +16,11 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  late String phone,first_name,last_name;
+  late String first_name,last_name;
+  TextEditingController _fName=TextEditingController();
+  TextEditingController _lName=TextEditingController();
 
-  //TextController to read text entered in text field
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmpassword = TextEditingController();
+
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
@@ -46,6 +47,7 @@ class _SignUpState extends State<SignUp> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration: buildInputDecoration(Icons.person,tx.app_texts.firstName),
+                    controller: _fName,
                     validator: (value){
                       if(value!.isEmpty)
                       {
@@ -63,6 +65,7 @@ class _SignUpState extends State<SignUp> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration: buildInputDecoration(Icons.person,tx.app_texts.lastName),
+                    controller: _lName,
                     validator: (value){
                       if(value!.isEmpty)
                       {
@@ -99,6 +102,11 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       if(_formkey.currentState!.validate()){
                         debugPrint("successful");
+                        debugPrint(widget.phone);
+                        debugPrint(_fName.text);
+                        debugPrint(_lName.text);
+                        uDB.newUser(widget.phone,_fName.text,_lName.text);
+
                         return;
                       }
                       else{

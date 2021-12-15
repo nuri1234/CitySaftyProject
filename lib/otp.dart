@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-import 'data_base.dart' as db;
-import 'signup_screen.dart';
+import 'entities/user.dart';
+import 'user_db.dart' as udb;
 import 'city_safty_screen.dart';
+import 'signup_screen.dart';
 class OTP extends StatefulWidget {
 
 
@@ -32,26 +33,25 @@ class _OTPState extends State<OTP> {
   );
 
   void findUser() async{
-    var myuser = await db.getUserByphon(widget.phone);
-    if(myuser.phone=="X") {
+    var user=await udb.search(widget.phone);
+    if(user==null){
       debugPrint("user not existed");
-      Navigator.push(context,MaterialPageRoute(builder: (context) => SignUp(
-      phone: widget.phone
+      Navigator.of(context).push(MaterialPageRoute(builder: (c)=>SignUp(
+        phone: widget.phone,
+
       )));
+
+
     }
-
-      
-
     else{
-      debugPrint("existed user");
-      Navigator.of(context).push(MaterialPageRoute(builder: (c)=>CitySafety(
-          myUser:myuser,)));
+      debugPrint("existed user phone:${user.phone} name:${user.first_name} ${user.last_name}");
 
+      Navigator.of(context).push(MaterialPageRoute(builder: (c)=>CitySafety(
+          user: user
+
+      )));
 
     }
-
-
-
 
   }
 

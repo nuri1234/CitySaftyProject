@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
-import 'phone_verify_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'data_base.dart' as db;
-import 'entities/user.dart';
+import 'user_db.dart' as udb;
+import 'mongo_data_base.dart' as mDB;
 import 'signup_screen.dart';
 
-void main() async{
- db.insertUser("0522258899", "davy", "gov");
-//  db.userRegistration("0522258899", "davy", "gov");
 
+void toStart() async{
+ await mDB.MongoDatabase.connect();
+ var u=await udb.search("0542253988");
+ debugPrint(u.first_name);
+
+
+
+}
+
+
+void main() async{
+ await mDB.MongoDatabase.connect();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
