@@ -1,7 +1,7 @@
 
 class app_texts{
 
-  static String CitySafty= "City Safty";
+  static String CitySafty= "City Safety";
   static String Citizen= "Citizen";
   static String EmergencyCenter= "Emergency";
   static String EmergencyCenter2= "Center";
